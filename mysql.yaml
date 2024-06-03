@@ -1,0 +1,33 @@
+- name: installing my mysql 
+  hosts: db
+  become: yes 
+  vars:
+    login_host: bigmatrix
+  vars_promts:
+    - name: mysql_root_password
+      prompt: please enter MySQL root password
+      private: no
+  tasks: 
+    - name: Install MySQL Server
+      ansible.builtin.dnf:
+        name: mysql-server
+        state: present
+    
+    - name: enableing  mysqld
+      ansible.builtin.service:
+        name: mysqld
+        enabled: yes
+        state: started
+    
+    - name: my secure installation 
+      ansible.builtin.command: mysql_secure_installation --set-root-pass ExpenseApp@1
+      
+    
+    
+     
+     
+
+
+      
+
+
